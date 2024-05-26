@@ -1,0 +1,96 @@
+<html>
+<head>
+    <meta cache-control="no-cache">
+</head>
+<body>
+<h2>RAG TEST</h2>
+<form action="/" method="POST">
+    <div>
+        <label for="url">URL</label>
+        <input type="text" id="url" name="url" style="width:900px" />
+    </div>
+    <div>
+        <input type="button" value="LOAD" onclick="loadWebSite();"><BR>
+        <p>loading website destroy existing data  </p>
+    </div>
+    </BR>
+    <div>
+        <label for="query">QUERY</label>
+        <input type="text" id="query" name="query" style="width:900px" />
+    </div>
+    <div>
+        <input type="button" value="SEND" onclick="getAnswer();">
+    </div>
+    </BR>
+    <div>ANSWER:</div>
+    <div id="setAnswer">
+    </div>
+</form>
+<script>
+    function setLoading(){
+        let img = new Image();
+        img.src = "{{url_for('static', filename='img/loading.gif')}}";
+
+        let div = document.getElementById("setAnswer");
+        div.appendChild(img);
+    }
+
+    function deleteFromDiv(){
+        div = document.getElementById("setAnswer");
+
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+    }
+
+    function getAnswer(){
+        deleteFromDiv();
+        setLoading();
+
+        const form = document.querySelector('form');
+        const formData = new FormData(form);
+
+        const requestData = {
+            method: 'POST',    
+            body: formData    
+        };
+
+        fetch('/answer', requestData)
+            .then(response => response.text()) 
+            .then(data => {
+                console.log(data);
+                deleteFromDiv();
+                document.getElementById("setAnswer").innerHTML=data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function loadWebSite(){
+        deleteFromDiv();
+        setLoading();
+
+        const form = document.querySelector('form');
+        const formData = new FormData(form);
+
+        const requestData = {
+            method: 'POST',    
+            body: formData    
+        };
+
+        fetch('/load', requestData)
+            .then(response => response.text()) 
+            .then(data => {
+                console.log(data);
+                deleteFromDiv();
+                document.getElementById("setAnswer").innerHTML=data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+</script>
+</body>
+</html>

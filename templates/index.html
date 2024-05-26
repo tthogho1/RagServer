@@ -1,16 +1,10 @@
 <html>
+<head>
+    <meta cache-control="no-cache">
+</head>
 <body>
 <h2>RAG TEST</h2>
 <form action="/" method="POST">
-    <div>
-        <label for="url">URL</label>
-        <input type="text" id="url" name="url" style="width:900px" />
-    </div>
-    <div>
-        <input type="button" value="LOAD" onclick="loadWebSite();"><BR>
-        <p>loading website destroy existing data  </p>
-    </div>
-    </BR>
     <div>
         <label for="query">QUERY</label>
         <input type="text" id="query" name="query" style="width:900px" />
@@ -19,17 +13,14 @@
         <input type="button" value="SEND" onclick="getAnswer();">
     </div>
     </BR>
-    <div>RESULT MESSAGE:</div>
+    <div>ANSWER:</div>
     <div id="setAnswer">
     </div>
 </form>
-
 <script>
-
-    var imgUrl = "/loading";
     function setLoading(){
         let img = new Image();
-        img.src = imgUrl;
+        img.src = "{{url_for('static', filename='img/loading.gif')}}";
 
         let div = document.getElementById("setAnswer");
         div.appendChild(img);
@@ -38,7 +29,6 @@
     function deleteFromDiv(){
         div = document.getElementById("setAnswer");
 
-        // divÇÃéqóvëfÇëSÇƒçÌèú
         while (div.firstChild) {
             div.removeChild(div.firstChild);
         }
@@ -68,7 +58,6 @@
             });
     }
 
-
     function loadWebSite(){
         deleteFromDiv();
         setLoading();
@@ -94,6 +83,5 @@
         }
 
 </script>
-
 </body>
 </html>

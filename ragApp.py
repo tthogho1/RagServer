@@ -1,23 +1,28 @@
 import configparser
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
 from ragClasses.OpenAIRag import OpenAIRag
 
 config = configparser.ConfigParser()
-# read config file
-# openapikey="xxxxxx"
-app = Flask(__name__)
-ragClass = OpenAIRag()
+config.read('config.ini')
+db_name = config['vectordb']['name']
+
+app = Flask(__name__, static_folder='static')
+ragClass = OpenAIRag(db_name)
+
 
 @app.route("/", methods=["GET"])
 def hello_world():
-    # if post method ,get parameter     
-    return app.send_static_file('index.html')
+    # if post method ,get parameter
+    # static_file('index.html')
+    return render_template('index.html')
+
 
 @app.route("/loading", methods=["GET"])
 def loadingImage():
-    # if post method ,get parameter     
+    # if post method ,get parameter
     return app.send_static_file('img/loading.gif')
+
 
 @app.route("/load", methods=["POST"])
 def loadWebSite():
@@ -26,11 +31,11 @@ def loadWebSite():
     ragClass.loadUrl()
     return "load complete"
 
+
 @app.route("/answer", methods=["POST"])
 def answerAboutSite():
-    query= request.form.get('query')        
-    message = ragClass.rag_chain(query)
-    return message
+    query = request.form.get('query')
+    return ragClass.rag_chain(query)
 
 
 if __name__ == "__main__":
