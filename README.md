@@ -1,4 +1,4 @@
-# ChatBot Server by Rag with Cloud
+# ChatBot Server by Rag
 Embedding website data, registering it in Vector DB, and asking questions about it.
 
 ## config.ini
