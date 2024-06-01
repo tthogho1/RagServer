@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta cache-control="no-cache">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
 </head>
 <body>
 <h2>RAG TEST</h2>
@@ -10,19 +11,9 @@
         <input type="text" id="url" name="url" style="width:900px" />
     </div>
     <div>
-        <input type="button" value="LOAD" onclick="loadWebSite();"><BR>
-        <p>loading website destroy existing data  </p>
+        <input type="button" value="Add" onclick="addWebSite();">
     </div>
-    </BR>
-    <div>
-        <label for="query">QUERY</label>
-        <input type="text" id="query" name="query" style="width:900px" />
-    </div>
-    <div>
-        <input type="button" value="SEND" onclick="getAnswer();">
-    </div>
-    </BR>
-    <div>ANSWER:</div>
+    <div>result:</div>
     <div id="setAnswer">
     </div>
 </form>
@@ -67,7 +58,7 @@
             });
     }
 
-    function loadWebSite(){
+    function addWebSite(){
         deleteFromDiv();
         setLoading();
 

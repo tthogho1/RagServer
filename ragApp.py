@@ -18,18 +18,15 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route("/loading", methods=["GET"])
-def loadingImage():
-    # if post method ,get parameter
-    return app.send_static_file('img/loading.gif')
-
-
-@app.route("/load", methods=["POST"])
+@app.route("/load", methods=["GET","POST"])
 def loadWebSite():
-    url = request.form.get('url')
-    ragClass.setUrl(url)
-    ragClass.loadUrl()
-    return "load complete"
+    if request.method == 'POST':
+        url = request.form.get('url')
+        ragClass.setUrl(url)
+        ragClass.loadUrl()
+        return "load complete"
+    else:
+        return render_template('load.html')
 
 
 @app.route("/answer", methods=["POST"])
