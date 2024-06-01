@@ -1,21 +1,33 @@
 <html>
 <head>
     <meta cache-control="no-cache">
-    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<h2>RAG TEST</h2>
+<header class="bg-gray-800 py-4">
+    <nav class="container mx-auto flex justify-between items-center">
+        <ul class="flex space-x-4">
+            <li><a href="/" class="ml-8 text-gray-300 hover:text-white">Chat</a></li>
+        </ul>
+    </nav>
+</header>
+<h2 class="mt-4 text-center text-3xl font-bold">RAG TEST DATA LOAD</h2>
 <form action="/" method="POST">
-    <div>
-        <label for="url">URL</label>
-        <input type="text" id="url" name="url" style="width:900px" />
+<div class="grid grid-cols-12 gap-4 font-bold">
+    <div class="items-center ml-8 col-span-12 text-xl">
+        URL
     </div>
-    <div>
-        <input type="button" value="Add" onclick="addWebSite();">
+    <div class="col-span-9">
+        <input class="ml-4 items-center border-2 border-black" type="text" id="url" name="url" style="width:900px" />
     </div>
-    <div>result:</div>
+    <div class="ml-4 col-span-3">
+        <input class="bg-blue-500 text-white px-4 py-2 rounded" type="button" value="Add" onclick="addWebSite();">
+    </div>
+    <div class="ml-8 mt-4 col-span-12 text-xl font-bold">result:</div>
     <div id="setAnswer">
     </div>
+</div>
 </form>
 <script>
     function setLoading(){
