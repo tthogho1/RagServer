@@ -1,22 +1,36 @@
 <html>
 <head>
     <meta cache-control="no-cache">
-    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<h2>RAG TEST</h2>
+<header class="bg-gray-800 py-4">
+    <nav class="container mx-auto flex justify-between items-center">
+        <ul class="flex space-x-4">
+            <li><a href="/" class="ml-8 text-gray-300 hover:text-white">Load Data</a></li>
+        </ul>
+    </nav>
+</header>
+<h2 class="mt-4 text-center text-3xl font-bold">RAG TEST</h2>
 <form action="/" method="POST">
-    <div>
-        <label for="query">QUERY</label>
-        <input type="text" id="query" name="query" style="width:900px" />
+<div class="grid grid-cols-12 gap-4 font-bold">
+    <div class="items-center ml-8 col-span-9 text-xl">
+        QUERY
     </div>
     <div>
-        <input type="button" value="SEND" onclick="getAnswer();">
+        <a href="/load" class="ml-4 col-span-3 underline">Data Load</a>
     </div>
-    </BR>
-    <div>ANSWER:</div>
-    <div id="setAnswer">
+    <div class="col-span-9">
+        <input class="ml-4 items-center border-2 border-black" type="text" id="query" name="query" style="width:100%" />
     </div>
+    <div class="ml-4 col-span-3">
+        <input class="bg-blue-500 text-white px-4 py-2 rounded" type="button" value="SEND" onclick="getAnswer();">
+    </div>
+    <div class="ml-8 mt-4 col-span-12 text-xl font-bold">ANSWER:</div>
+    <div class="ml-4 col-span-10 border-2 border-blank h-32 w-full" id="setAnswer">
+    </div>
+</div>  
 </form>
 <script>
     function setLoading(){

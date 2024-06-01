@@ -18,7 +18,7 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route("/load", methods=["GET","POST"])
+@app.route("/load", methods=["GET", "POST"])
 def loadWebSite():
     if request.method == 'POST':
         url = request.form.get('url')
